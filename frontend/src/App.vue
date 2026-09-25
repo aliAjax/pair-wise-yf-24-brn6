@@ -1,12 +1,32 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import { routes } from "./router/routes";
-import { mockData } from "./mocks/seedData";
 import StatusBadge from "./components/common/StatusBadge.vue";
 import StatCard from "./components/common/StatCard.vue";
-const active = ref<string>(routes[0]?.route ?? "/dashboard");
+import { useHandoverStore } from "./stores/HandoverStore";
+import { storeToRefs } from "pinia";
+
+function readHashRoute(): string {
+  const hash = window.location.hash.replace(/^#/, "");
+  return routes.some((route) => route.route === hash) ? hash : routes[0].route;
+}
+
+const active = ref<string>(readHashRoute());
+function navigate(route: string) {
+  window.location.hash = route;
+}
+window.addEventListener("hashchange", () => {
+  active.value = readHashRoute();
+});
+
 const current = computed(() => routes.find((route) => route.route === active.value) ?? routes[0]);
-const entries = Object.entries(mockData);
+const currentComponent = computed(() => current.value.component);
+
+const handoverStore = useHandoverStore();
+const { riskItems, handoverRecords } = storeToRefs(handoverStore);
+handoverStore.load();
+
+const openCount = computed(() => riskItems.value.filter((item) => item.status === "OPEN").length);
 </script>
 
 <template>
@@ -14,13 +34,33 @@ const entries = Object.entries(mockData);
     <aside>
       <div class="brand">隐私政策差异对比器</div>
       <nav>
-        <button v-for="route in routes" :key="route.route" :class="{ active: active === route.route }" @click="active = route.route">{{ route.name }}</button>
+        <template v-for="(group, label) in { '审阅': routes.filter(r => !r.group), '交接台': routes.filter(r => r.group) }" :key="label">
+          <p class="nav-group">{{ label }}</p>
+          <button
+            v-for="route in group"
+            :key="route.route"
+            :class="{ active: active === route.route }"
+            @click="navigate(route.route)"
+          >
+            {{ route.name }}
+          </button>
+        </template>
       </nav>
     </aside>
     <main class="page">
-      <section class="page-head"><div><p class="eyebrow">policy-diff</p><h1>{{ current?.name }}</h1></div><StatusBadge value="LOCAL_DATA" /></section>
-      <section class="metrics"><StatCard label="核心模型" :value="entries.length" /><StatCard label="共享枚举" :value="3" /><StatCard label="本地记录" :value="entries.reduce((s, [, rows]) => s + rows.length, 0)" /></section>
-      <section class="workbench"><div class="panel wide"><h2>业务数据</h2><article class="row" v-for="[key, rows] in entries" :key="key"><strong>{{ key }}</strong><span>{{ rows.length }} 条</span><StatusBadge value="READY" /></article></div><div class="panel"><h2>联动检查</h2><p>页面、store、API、构造器、日志模板和枚举常量均按提示词拆分。</p></div></section>
+      <section class="page-head">
+        <div>
+          <p class="eyebrow">policy-diff · handover desk</p>
+          <h1>{{ current?.name }}</h1>
+        </div>
+        <StatusBadge value="LOCAL_DATA" />
+      </section>
+      <section class="metrics">
+        <StatCard label="风险条目" :value="riskItems.length" />
+        <StatCard label="剩余待办" :value="openCount" />
+        <StatCard label="交接记录" :value="handoverRecords.length" />
+      </section>
+      <component :is="currentComponent" />
     </main>
   </div>
 </template>
