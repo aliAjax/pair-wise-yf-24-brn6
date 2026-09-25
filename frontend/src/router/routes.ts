@@ -1,5 +1,9 @@
 export const routes = [
   {
+    "name": "交接台",
+    "route": "/handoff"
+  },
+  {
     "name": "文档导入",
     "route": "/documents"
   },

@@ -1,112 +1,236 @@
+// 本地模拟数据：三版隐私政策 + 风险条目 + 交接历史
 export const mockData = {
   "policyDocument": [
     {
       "id": 1,
-      "title": "title 1",
-      "version_label": "version label 1",
-      "raw_text": "raw text 1",
-      "normalized_sections": "normalized sections 1",
-      "imported_at": "2026-06-11T09:00:00Z"
+      "title": "隐私政策",
+      "version_label": "v1.0",
+      "raw_text": "隐私政策 v1.0 全文……",
+      "normalized_sections": "共 6 个条款段落",
+      "imported_at": "2026-01-15T09:00:00Z"
     },
     {
       "id": 2,
-      "title": "title 2",
-      "version_label": "version label 2",
-      "raw_text": "raw text 2",
-      "normalized_sections": "normalized sections 2",
-      "imported_at": "2026-06-12T09:00:00Z"
+      "title": "隐私政策",
+      "version_label": "v2.0",
+      "raw_text": "隐私政策 v2.0 全文……",
+      "normalized_sections": "共 6 个条款段落",
+      "imported_at": "2026-04-20T09:00:00Z"
     },
     {
       "id": 3,
-      "title": "title 3",
-      "version_label": "version label 3",
-      "raw_text": "raw text 3",
-      "normalized_sections": "normalized sections 3",
-      "imported_at": "2026-06-13T09:00:00Z"
+      "title": "隐私政策",
+      "version_label": "v3.0",
+      "raw_text": "隐私政策 v3.0 全文……",
+      "normalized_sections": "共 6 个条款段落",
+      "imported_at": "2026-09-01T09:00:00Z"
     }
   ],
   "policySection": [
-    {
-      "id": 1,
-      "document_id": 1,
-      "section_no": "section no 1",
-      "heading": "heading 1",
-      "content": "content 1",
-      "category": "REMOVED",
-      "risk_level": "LOW"
-    },
-    {
-      "id": 2,
-      "document_id": 2,
-      "section_no": "section no 2",
-      "heading": "heading 2",
-      "content": "content 2",
-      "category": "MODIFIED",
-      "risk_level": "MEDIUM"
-    },
-    {
-      "id": 3,
-      "document_id": 3,
-      "section_no": "section no 3",
-      "heading": "heading 3",
-      "content": "content 3",
-      "category": "MOVED",
-      "risk_level": "HIGH"
-    }
+    { "id": 101, "document_id": 3, "section_no": "1.1", "heading": "我们如何收集信息", "content": "我们会收集您主动提供的账号信息，并在您使用服务时收集设备标识、日志信息与粗略位置信息。", "category": "DATA_COLLECTION", "risk_level": "HIGH" },
+    { "id": 102, "document_id": 3, "section_no": "1.2", "heading": "设备信息收集范围", "content": "收集设备型号、操作系统、唯一设备标识符、IP 地址与运行日志。", "category": "DATA_COLLECTION", "risk_level": "MEDIUM" },
+    { "id": 201, "document_id": 3, "section_no": "2.1", "heading": "与第三方共享", "content": "在获得同意后，我们会与支付与物流服务商共享完成交易所必需的信息。", "category": "SHARING", "risk_level": "HIGH" },
+    { "id": 202, "document_id": 3, "section_no": "2.2", "heading": "广告合作方共享", "content": "我们可能向广告合作方共享去标识化后的人群标签，用于投放效果统计。", "category": "SHARING", "risk_level": "CRITICAL" },
+    { "id": 301, "document_id": 3, "section_no": "3.1", "heading": "数据保存期限", "content": "在实现目的所必需的最短期限内保存，账号信息保存至账号注销后 6 个月。", "category": "RETENTION", "risk_level": "MEDIUM" },
+    { "id": 302, "document_id": 3, "section_no": "3.2", "heading": "注销后删除时限", "content": "账号注销后 15 个工作日内删除或匿名化处理个人信息。", "category": "RETENTION", "risk_level": "LOW" },
+    { "id": 11, "document_id": 2, "section_no": "1.1", "heading": "我们如何收集信息", "content": "我们会收集您主动提供的账号信息，并在您使用服务时收集设备标识与日志信息。", "category": "DATA_COLLECTION", "risk_level": "MEDIUM" },
+    { "id": 12, "document_id": 2, "section_no": "1.2", "heading": "设备信息收集范围", "content": "收集设备型号、操作系统、唯一设备标识符与 IP 地址。", "category": "DATA_COLLECTION", "risk_level": "MEDIUM" },
+    { "id": 21, "document_id": 2, "section_no": "2.1", "heading": "与第三方共享", "content": "在获得同意后，我们会与支付服务商共享完成交易所必需的信息。", "category": "SHARING", "risk_level": "HIGH" },
+    { "id": 22, "document_id": 2, "section_no": "2.2", "heading": "广告合作方共享", "content": "我们可能向广告合作方共享去标识化后的人群标签。", "category": "SHARING", "risk_level": "HIGH" },
+    { "id": 31, "document_id": 2, "section_no": "3.1", "heading": "数据保存期限", "content": "在实现目的所必需的期限内保存，账号信息保存至账号注销后 12 个月。", "category": "RETENTION", "risk_level": "MEDIUM" },
+    { "id": 32, "document_id": 2, "section_no": "3.2", "heading": "注销后删除时限", "content": "账号注销后 30 个工作日内删除或匿名化处理个人信息。", "category": "RETENTION", "risk_level": "LOW" }
   ],
   "diffResult": [
-    {
-      "id": 1,
-      "old_document_id": 1,
-      "new_document_id": 1,
-      "section_id": 1,
-      "diff_type": "REMOVED",
-      "summary": "summary 1",
-      "created_at": "2026-06-11T09:00:00Z"
-    },
-    {
-      "id": 2,
-      "old_document_id": 2,
-      "new_document_id": 2,
-      "section_id": 2,
-      "diff_type": "MODIFIED",
-      "summary": "summary 2",
-      "created_at": "2026-06-12T09:00:00Z"
-    },
-    {
-      "id": 3,
-      "old_document_id": 3,
-      "new_document_id": 3,
-      "section_id": 3,
-      "diff_type": "MOVED",
-      "summary": "summary 3",
-      "created_at": "2026-06-13T09:00:00Z"
-    }
+    { "id": 1, "old_document_id": 2, "new_document_id": 3, "section_id": 101, "diff_type": "MODIFIED", "summary": "数据收集范围新增粗略位置信息，风险由中升高", "created_at": "2026-09-01T09:05:00Z" },
+    { "id": 2, "old_document_id": 2, "new_document_id": 3, "section_id": 102, "diff_type": "MODIFIED", "summary": "设备信息新增运行日志采集", "created_at": "2026-09-01T09:05:00Z" },
+    { "id": 3, "old_document_id": 2, "new_document_id": 3, "section_id": 201, "diff_type": "MODIFIED", "summary": "共享对象新增物流服务商", "created_at": "2026-09-01T09:05:00Z" },
+    { "id": 4, "old_document_id": 2, "new_document_id": 3, "section_id": 202, "diff_type": "MODIFIED", "summary": "广告共享补充投放效果统计用途", "created_at": "2026-09-01T09:05:00Z" },
+    { "id": 5, "old_document_id": 2, "new_document_id": 3, "section_id": 301, "diff_type": "MODIFIED", "summary": "账号信息注销后保存期限由 12 个月缩短为 6 个月", "created_at": "2026-09-01T09:05:00Z" },
+    { "id": 6, "old_document_id": 2, "new_document_id": 3, "section_id": 302, "diff_type": "MODIFIED", "summary": "注销后删除时限由 30 个工作日缩短为 15 个工作日", "created_at": "2026-09-01T09:05:00Z" }
   ],
   "reviewNote": [
+    { "id": 1, "diff_result_id": 1, "tag": "收集范围扩大", "comment": "粗略位置信息需补充告知与关闭入口", "reviewer": "王敏", "status": "OPEN" },
+    { "id": 2, "diff_result_id": 4, "tag": "广告共享", "comment": "去标识化方案待安全团队复核", "reviewer": "周宁", "status": "OPEN" },
+    { "id": 3, "diff_result_id": 5, "tag": "保存期限", "comment": "缩短期限符合最小必要原则", "reviewer": "陈璐", "status": "CONFIRMED" }
+  ],
+  // 风险条目：assignee 为空串的是旧记录没有负责人 → 未分配池
+  "riskItem": [
     {
       "id": 1,
-      "diff_result_id": 1,
-      "tag": "tag 1",
-      "comment": "comment 1",
-      "reviewer": "reviewer 1",
-      "status": "CONFIRMED"
+      "clause_no": "1.1",
+      "clause_key": "DATA_COLLECTION#1.1",
+      "title": "我们如何收集信息",
+      "category": "DATA_COLLECTION",
+      "risk_level": "HIGH",
+      "status": "OPEN",
+      "document_id": 3,
+      "summary": "新增收集粗略位置信息，并明确日志信息范围",
+      "previous_summary": "仅收集账号信息、设备标识与日志信息，未提及位置信息",
+      "reopened_at": "2026-09-01T09:10:00Z",
+      "assignee": "王敏",
+      "confirmed_conclusion": "收集范围与告知方式一致，风险可接受",
+      "confirmed_by": "王敏",
+      "confirmed_at": "2026-05-06T10:00:00Z",
+      "witness": null,
+      "created_at": "2026-04-21T09:00:00Z",
+      "updated_at": "2026-09-01T09:10:00Z"
     },
     {
       "id": 2,
-      "diff_result_id": 2,
-      "tag": "tag 2",
-      "comment": "comment 2",
-      "reviewer": "reviewer 2",
-      "status": "IGNORED"
+      "clause_no": "1.2",
+      "clause_key": "DATA_COLLECTION#1.2",
+      "title": "设备信息收集范围",
+      "category": "DATA_COLLECTION",
+      "risk_level": "MEDIUM",
+      "status": "OPEN",
+      "document_id": 3,
+      "summary": "新增运行日志采集，需确认用途说明",
+      "previous_summary": null,
+      "reopened_at": null,
+      "assignee": "王敏",
+      "confirmed_conclusion": null,
+      "confirmed_by": null,
+      "confirmed_at": null,
+      "witness": null,
+      "created_at": "2026-09-01T09:10:00Z",
+      "updated_at": "2026-09-01T09:10:00Z"
     },
     {
       "id": 3,
-      "diff_result_id": 3,
-      "tag": "tag 3",
-      "comment": "comment 3",
-      "reviewer": "reviewer 3",
-      "status": "OPEN"
+      "clause_no": "2.1",
+      "clause_key": "SHARING#2.1",
+      "title": "与第三方共享",
+      "category": "SHARING",
+      "risk_level": "HIGH",
+      "status": "CONFIRMED",
+      "document_id": 3,
+      "summary": "共享对象为支付与物流服务商，均有合同约束",
+      "previous_summary": null,
+      "reopened_at": null,
+      "assignee": "周宁",
+      "confirmed_conclusion": "共享清单与合同义务匹配，已确认无异议",
+      "confirmed_by": "李航",
+      "confirmed_at": "2026-05-08T14:00:00Z",
+      "witness": {
+        "owner": "周宁",
+        "handoff_id": 1,
+        "note": "李航交接共享类事项，已核对原结论与合同附件，接手见证。",
+        "handed_at": "2026-05-10T11:00:00Z"
+      },
+      "created_at": "2026-04-21T09:00:00Z",
+      "updated_at": "2026-05-10T11:00:00Z"
+    },
+    {
+      "id": 4,
+      "clause_no": "2.2",
+      "clause_key": "SHARING#2.2",
+      "title": "广告合作方共享",
+      "category": "SHARING",
+      "risk_level": "CRITICAL",
+      "status": "OPEN",
+      "document_id": 3,
+      "summary": "新增投放效果统计用途，去标识化方案待复核",
+      "previous_summary": null,
+      "reopened_at": null,
+      "assignee": "周宁",
+      "confirmed_conclusion": null,
+      "confirmed_by": null,
+      "confirmed_at": null,
+      "witness": null,
+      "created_at": "2026-09-01T09:10:00Z",
+      "updated_at": "2026-09-01T09:10:00Z"
+    },
+    {
+      "id": 5,
+      "clause_no": "3.1",
+      "clause_key": "RETENTION#3.1",
+      "title": "数据保存期限",
+      "category": "RETENTION",
+      "risk_level": "MEDIUM",
+      "status": "CONFIRMED",
+      "document_id": 3,
+      "summary": "账号信息注销后保存 6 个月，符合最小必要",
+      "previous_summary": null,
+      "reopened_at": null,
+      "assignee": "陈璐",
+      "confirmed_conclusion": "缩短后的保存期限符合最小必要原则",
+      "confirmed_by": "陈璐",
+      "confirmed_at": "2026-09-02T10:30:00Z",
+      "witness": null,
+      "created_at": "2026-04-21T09:00:00Z",
+      "updated_at": "2026-09-02T10:30:00Z"
+    },
+    {
+      "id": 6,
+      "clause_no": "3.2",
+      "clause_key": "RETENTION#3.2",
+      "title": "注销后删除时限",
+      "category": "RETENTION",
+      "risk_level": "LOW",
+      "status": "OPEN",
+      "document_id": 3,
+      "summary": "删除时限缩短为 15 个工作日，待运维确认流程",
+      "previous_summary": null,
+      "reopened_at": null,
+      "assignee": "",
+      "confirmed_conclusion": null,
+      "confirmed_by": null,
+      "confirmed_at": null,
+      "witness": null,
+      "created_at": "2026-04-22T09:00:00Z",
+      "updated_at": "2026-09-01T09:10:00Z"
+    },
+    {
+      "id": 7,
+      "clause_no": "1.0",
+      "clause_key": "DATA_COLLECTION#1.0",
+      "title": "Cookie 与同类技术（历史条款）",
+      "category": "DATA_COLLECTION",
+      "risk_level": "LOW",
+      "status": "OPEN",
+      "document_id": 1,
+      "summary": "旧版 Cookie 条款遗留待办，原始负责人字段缺失",
+      "previous_summary": null,
+      "reopened_at": null,
+      "assignee": "",
+      "confirmed_conclusion": null,
+      "confirmed_by": null,
+      "confirmed_at": null,
+      "witness": null,
+      "created_at": "2026-01-16T09:00:00Z",
+      "updated_at": "2026-01-16T09:00:00Z"
+    }
+  ],
+  "handoffRecord": [
+    {
+      "id": 1,
+      "category": "SHARING",
+      "from_owner": "李航",
+      "to_owner": "周宁",
+      "note": "休产假交接：广告共享复核进行中；已确认的第三方共享条目结论保留，请接手留见证。",
+      "moved_open_count": 1,
+      "witnessed_count": 1,
+      "created_at": "2026-05-10T11:00:00Z"
+    },
+    {
+      "id": 2,
+      "category": "DATA_COLLECTION",
+      "from_owner": "",
+      "to_owner": "王敏",
+      "note": "从未分配池认领数据收集类待办。",
+      "moved_open_count": 2,
+      "witnessed_count": 0,
+      "created_at": "2026-06-02T09:30:00Z"
+    },
+    {
+      "id": 3,
+      "category": "RETENTION",
+      "from_owner": "赵磊",
+      "to_owner": "陈璐",
+      "note": "离职交接保存期限类条目，删除时限需与运维排期对齐。",
+      "moved_open_count": 1,
+      "witnessed_count": 0,
+      "created_at": "2026-03-18T16:00:00Z"
     }
   ]
 } as const;
